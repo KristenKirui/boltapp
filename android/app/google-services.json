@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "36974916364",
+    "project_id": "fir-bolt-app",
+    "storage_bucket": "fir-bolt-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36974916364:android:483b9e97161e65d72c4f29",
+        "android_client_info": {
+          "package_name": "com.example.bolt_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_0oXDMaLEW3sbvpB380CmKGTZbui1Aoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
