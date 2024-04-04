@@ -1,8 +1,10 @@
-import 'package:bolt_app/screens/home_page.dart';
+// ignore_for_file: use_build_context_synchro
+
 import 'package:bolt_app/screens/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:bolt_app/help/helper_function.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -16,17 +18,20 @@ class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  Future login() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim());
-  }
+  void login() async {
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
+            try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text);
+      } on FirebaseAuthException catch (e) {
+        Navigator.pop(context);
+        displayMessageToUser(e.code, context);
+      }
 
-  @override
-  void dispose() {
-    emailController.dispose();
-
-    super.dispose();
   }
 
   @override
@@ -77,15 +82,7 @@ class _LoginState extends State<Login> {
                   GestureDetector(
                     onTap: login,
                     child: FloatingActionButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => const HomePage(),
-                          ),
-                        );
-                      },
-                      backgroundColor: Colors.black,
+                      onPressed: login,
                       child: const Text(
                         "Login",
                         style: TextStyle(color: Colors.white),
@@ -103,12 +100,12 @@ class _LoginState extends State<Login> {
                           text: ' Register',
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Register()),
-                                  );
-                                },
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Register()),
+                              );
+                            },
                           style: const TextStyle(
                             color: Colors.black,
                           ),

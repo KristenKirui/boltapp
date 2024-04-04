@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bolt_app/screens/login.dart';
+import 'package:bolt_app/auth_gate.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const Login()));
+          context, MaterialPageRoute(builder: (context) =>const AuthGate()));
     });
   }
 @override
